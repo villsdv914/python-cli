@@ -76,6 +76,7 @@ def refreshAction(arguments=None):
         try:
             cpu_utilization()
             memory_utilization()
+            disk_utilization()
             network_stats()
             getUpTime()
             if arguments.limit:
@@ -111,6 +112,7 @@ def main():
     if len(sys.argv) == 1:
         cpu_utilization()
         memory_utilization()
+        disk_utilization()
         network_stats()
         getUpTime()
         getProcessbylimit()
@@ -121,16 +123,18 @@ def main():
     args = parser.parse_args()
 
     # calling functions depending on type of argument
-    if args.limit != None:
-        cpu_utilization()
-        memory_utilization()
-        network_stats()
-        getUpTime()
-        getProcessbylimit(limit=args.limit[0])
     if args.follow != None:
         followAction(arguments=args)
     if args.refresh != None:
         refreshAction(arguments=args)
+    if args.limit != None:
+        cpu_utilization()
+        memory_utilization()
+        disk_utilization()
+        network_stats()
+        getUpTime()
+        getProcessbylimit(limit=args.limit[0])
+
 
 
 if __name__ == "__main__":
